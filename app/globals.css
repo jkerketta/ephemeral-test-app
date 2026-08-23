@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  background: #0f1117;
+  color: #e6e6e6;
+  margin: 0;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+.add-form {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.add-form input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #1a1d27;
+  color: inherit;
+}
+
+.add-form button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #4f7cff;
+  color: white;
+  cursor: pointer;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #1a1d27;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+}
+
+.todo-list li.done span {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.todo-list form {
+  margin: 0;
+}
+
+.todo-list button {
+  background: none;
+  border: none;
+  color: #4f7cff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.empty {
+  color: #888;
+}

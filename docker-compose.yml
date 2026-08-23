@@ -1,0 +1,27 @@
+services:
+  web:
+    build: .
+    labels:
+      - "ephemeral.web=true"
+    environment:
+      DATABASE_URL: postgresql://ephemeral:ephemeral@db:5432/ephemeral
+      PORT: "3000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ephemeral
+      POSTGRES_PASSWORD: ephemeral
+      POSTGRES_DB: ephemeral
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ephemeral"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
