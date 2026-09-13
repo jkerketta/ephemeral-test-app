@@ -17,7 +17,9 @@ environments end to end.
 
 ```sh
 docker compose up --build
-# open http://localhost:3000
+# web publishes no host port (previews are routed via Traefik in Ephemeral);
+# smoke-test from inside the container:
+docker compose exec web node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>r.text()).then(console.log)"
 ```
 
 ## Validate compose config
