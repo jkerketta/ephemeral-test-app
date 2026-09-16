@@ -1,8 +1,8 @@
 generator client {
   provider = "prisma-client-js"
-  # The runtime image may detect a different OpenSSL flavor than the
-  # build stage did; include both arm64 engine variants explicitly so
-  # the generated client works in either environment.
+  // The runtime image may detect a different OpenSSL flavor than the
+  // build stage did; include both arm64 engine variants explicitly so
+  // the generated client works in either environment.
   binaryTargets = ["native", "linux-arm64-openssl-1.1.x", "linux-arm64-openssl-3.0.x"]
 }
 
