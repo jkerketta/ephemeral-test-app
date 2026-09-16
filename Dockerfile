@@ -26,11 +26,10 @@ COPY --from=builder --chown=node:node /app/.next/standalone ./
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 COPY --from=builder --chown=node:node /app/public ./public
 
-# prisma migrate deploy needs the CLI, engines, schema and migrations
-COPY --from=builder --chown=node:node /app/prisma ./prisma
-COPY --from=builder --chown=node:node /app/node_modules/prisma ./node_modules/prisma
-COPY --from=builder --chown=node:node /app/node_modules/@prisma ./node_modules/@prisma
-COPY --from=builder --chown=node:node /app/node_modules/.bin ./node_modules/.bin
+# Prisma 6's CLI loads hoisted deps (e.g. 'effect') from the package root,
+# so copy the full node_modules rather than a selective subset. Copied
+# after the standalone bundle so its files win.
+COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 
 USER node
 EXPOSE 3000
