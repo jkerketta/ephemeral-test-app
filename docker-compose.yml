@@ -6,6 +6,10 @@ services:
     environment:
       DATABASE_URL: postgresql://ephemeral:ephemeral@db:5432/ephemeral
       PORT: "3000"
+      # Prisma 6.19.3's upstream engine set lacks the arm64/openssl-3.0
+      # schema-engine binary; point the CLI at the bundled 1.1.x binary,
+      # which is statically linked and runs on OpenSSL 3 systems.
+      PRISMA_SCHEMA_ENGINE_BINARY: /app/node_modules/@prisma/engines/schema-engine-linux-arm64-openssl-1.1.x
     depends_on:
       db:
         condition: service_healthy
