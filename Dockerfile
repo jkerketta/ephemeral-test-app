@@ -5,6 +5,13 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
 FROM base AS deps
+# Prisma detects its engine target partly via the openssl CLI; without it
+# the build falls back to the openssl-1.1.x engines, which then mismatch
+# the openssl-3.0.x runtime. Install openssl in every stage that runs
+# prisma's install/generate detection.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends openssl \
+    && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json* ./
 RUN npm ci || npm install
 
